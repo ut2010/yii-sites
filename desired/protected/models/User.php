@@ -1,9 +1,9 @@
 <?php
 
 /**
- * This is the model class for table "user".
+ * This is the model class for table "User".
  *
- * The followings are the available columns in table 'user':
+ * The followings are the available columns in table 'User':
  * @property integer $id
  * @property string $email
  * @property string $pass
@@ -27,7 +27,7 @@ class User extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'user';
+		return 'User';
 	}
 
 	/**
