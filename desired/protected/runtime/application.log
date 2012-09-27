@@ -1,0 +1,20 @@
+2012/09/26 15:00:37 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "index".' in E:\xampp\htdocs\yii-sites\yii\framework\web\CController.php:484
+Stack trace:
+#0 E:\xampp\htdocs\yii-sites\yii\framework\web\CController.php(271): CController->missingAction('')
+#1 E:\xampp\htdocs\yii-sites\yii\framework\web\CWebApplication.php(283): CController->run('')
+#2 E:\xampp\htdocs\yii-sites\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('welcome')
+#3 E:\xampp\htdocs\yii-sites\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 E:\xampp\htdocs\yii-sites\desired\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/yii-sites/desired/index.php?r=welcome
+---
+2012/09/26 15:01:03 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "forgot".' in E:\xampp\htdocs\yii-sites\yii\framework\web\CController.php:484
+Stack trace:
+#0 E:\xampp\htdocs\yii-sites\yii\framework\web\CController.php(271): CController->missingAction('forgot')
+#1 E:\xampp\htdocs\yii-sites\yii\framework\web\CWebApplication.php(283): CController->run('forgot')
+#2 E:\xampp\htdocs\yii-sites\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('welcome/forgot')
+#3 E:\xampp\htdocs\yii-sites\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 E:\xampp\htdocs\yii-sites\desired\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/yii-sites/desired/index.php?r=welcome/forgot
+---
