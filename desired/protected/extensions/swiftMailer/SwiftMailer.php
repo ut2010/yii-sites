@@ -1,31 +1,31 @@
-<?php 
+<?php
 /**
  * Swift Mailer wrapper class.
  *
  * @author Sergii 'b3atb0x' hello@webkadabra.com
  */
 class SwiftMailer extends CComponent {
-	
+
 	/**
 	 * smtp, sendmail or mail
 	 */
-	public $mailer = 'sendmail'; // 
+	public $mailer = 'smtp'; //
 	/**
 	 * SMTP outgoing mail server host
 	 */
-	public $host;
+	public $host = 'mail.nic.ru';
 	/**
 	 * Outgoing SMTP server port
 	 */
 	public $port=25;
-	/** 
+	/**
 	 * SMTP Password
 	 */
-	public $username;
+	public $username = 'admin@demidov.nichost.ru';
 	/**
 	 * SMTP email
 	 */
-	public $password;
+	public $password = '73rUN7dDwZj7H';
 	/**
 	 * @param string Message Subject
 	 */
@@ -33,7 +33,7 @@ class SwiftMailer extends CComponent {
 	/**
 	 * @param mixed Email addres messages are going to be sent "from"
 	 */
-	public $From;
+	public $From = array('admin@demidov.nichost.ru' => 'Demidov');
 	/**
 	 * @param string HTML Message Body
 	 */
@@ -42,13 +42,13 @@ class SwiftMailer extends CComponent {
 	 * @param string Alternative message body (plain text)
 	 */
 	public $altBody=null;
-	
+
 	protected $_addresses=array();
-	
+
 	public function init() {
 		require_once(dirname(__FILE__).'/lib/swift_required.php');
 	}
-	
+
 	public function AddAddress($address) {
 		if(!in_array($address, $this->_addresses))
 			$this->_addresses[] = $address;
@@ -72,10 +72,10 @@ class SwiftMailer extends CComponent {
 	public function Send() {
 		//Create the Transport
 		$transport = $this->loadTransport();
-		
+
 		//Create the Mailer using your created Transport
 		$mailer = Swift_Mailer::newInstance($transport);
-		
+
 		//Create a message
 		$message = Swift_Message::newInstance($this->Subject)
 			  ->setFrom($this->From)
@@ -86,32 +86,32 @@ class SwiftMailer extends CComponent {
 		if($this->altBody) {
 			$message->setBody($this->altBody);
 		}
-		
+
 		$result = $mailer->send($message);
-		
+
 		$this->ClearAddresses();
 	}
 	public function ClearAddresses() {
 		$this->_addresses = array();
 	}
-	
+
 	/* Helpers */
 	public function preferences() {
 		return	Swift_Preferences;
 	}
-	
+
 	public function attachment() {
 		return Swift_Attachment;
 	}
-	
+
 	public function newMessage($subject) {
 		return Swift_Message::newInstance($subject);
 	}
-	
+
 	public function mailer($transport=null) {
 		return Swift_Mailer::newInstance($transport);
 	}
-	
+
 	public function image() {
 		return Swift_Image;
 	}
@@ -119,15 +119,15 @@ class SwiftMailer extends CComponent {
 	public function smtpTransport($host=null, $port=null) {
 		return Swift_SmtpTransport::newInstance($host, $port);
 	}
-	
+
 	public function sendmailTransport($command=null) {
 		return Swift_SendmailTransport::newInstance($command);
 	}
-	
+
 	public function mailTransport() {
 		return Swift_MailTransport::newInstance();
 	}
-	
+
 	protected function loadTransport() {
 		if($this->mailer == 'smtp') {
 			$transport = self::smtpTransport($this->host, $this->port);
@@ -137,9 +137,9 @@ class SwiftMailer extends CComponent {
 		} elseif($this->mailer == 'sendmail') {
 			$transport = self::sendmailTransport($this->sendmailCommand);
 		}
-		
+
 		return $transport;
 	}
-	
-	
+
+
 }

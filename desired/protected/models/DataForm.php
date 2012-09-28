@@ -41,6 +41,7 @@ class DataForm extends CFormModel
 		$salt="Simple salt string";
 		$user = new User();
 
+		$confirmation_line = $this->generateRandomStr();
 		$password = $this->generateRandomStr(10);
 		$pass = md5(md5($password.$salt));
 
@@ -48,11 +49,24 @@ class DataForm extends CFormModel
 		$user -> email = $this->email;
 		$user -> pass = $pass;
 		$user -> active = 0;
-		$user -> confirmation_line = $this->generateRandomStr();
+		$user -> confirmation_line = $confirmation_line;
 		$user -> save();
 		$id_user = $user->id;
 
-		//sendEmail();
+		$route = 'user/confirm';
+		$params = array ('confirm'=>$confirmation_line);
+		$url = WelcomeController::createUrl($route,$params);
+	$str = "<a href='".$url."'>Ссылка</a>";
+		// Отправка почты
+
+		Yii::app()->mailer->AddAddress($this->email);
+		Yii::app()->mailer->Subject = "Let's do this!";
+		Yii::app()->mailer->MsgHTML("<a href='$urlhttp://demidov-mebel.com'>Ссылка</a>");
+		Yii::app()->mailer->Send();
+
+
+
+		// Отправка почты
 
 		$data = new Data();
 		$data->id_user = $id_user;

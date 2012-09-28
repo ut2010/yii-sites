@@ -37,6 +37,19 @@ return array(
 			// enable cookie-based authentication
 			'allowAutoLogin'=>true,
 		),
+
+		'mailer' => array(
+		    'class' => 'ext.swiftMailer.SwiftMailer',
+		    // For SMTP
+		    //'mailer' => 'smtp',
+		    //'host'=>'localhost',
+		    //'From'=>'admin@localhost',
+		    //'username'=>'smptusername',
+		    //'password'=>'123456',
+		    // For sendmail:
+		    //'mailer'=>'sendmail',
+		),
+
 		// uncomment the following to enable URLs in path-format
 		/*
 		'urlManager'=>array(
